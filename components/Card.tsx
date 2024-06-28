@@ -11,7 +11,7 @@ export function Card({data = null, navigation}) {
 
     return (
         <TouchableOpacity style={styles.container} onPress={handleClick}>
-            <Text style={styles.text}>{data.name}</Text>
+            <Text style={styles.text}>{data?.name}</Text>
         </TouchableOpacity>
     );
 }
