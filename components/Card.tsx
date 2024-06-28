@@ -1,9 +1,12 @@
-import React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
-export function Card({ data, navigation }) {
-    function handleClick() {
-        navigation.navigate("Details", { pokemon: data });
+export function Card({data = null, navigation}) {
+
+   console.log(data)
+   
+
+   function handleClick(){
+    navigation.navigate("Details", {name: data?.url})
     }
 
     return (

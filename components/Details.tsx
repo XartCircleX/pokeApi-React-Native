@@ -1,24 +1,29 @@
-import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
+import useFetchPokemon from "@/hooks/useFetchPokemonInfo";
+import { useEffect } from "react";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export function Details({ navigation, route }) {
-    const { pokemon } = route.params;
+  const { info, loading, error } = useFetchPokemon(route.params.name);
 
-    function handleClick() {
-        navigation.navigate('Home');
-    }
+  useEffect(() => {
+    console.log(info, loading, error?.message);
+  }, [loading]);
+
+  function handleClick() {
+    navigation.navigate("Home");
+  }
 
     return (
         <View style={styles.container}>
             <View style={styles.card}>
             <Image
-                source={{ uri: pokemon.sprites.front_default }}
+                source={{ uri: info?.sprites.front_default }}
                 style={styles.sprite}
             />
-            <Text style={styles.text}>Name: {pokemon.name}</Text>
-            <Text style={styles.text}>Height: {pokemon.height}</Text>
-            <Text style={styles.text}>Weight: {pokemon.weight}</Text>
-            <Text style={styles.text}>Base Experience: {pokemon.base_experience}</Text>
+            <Text style={styles.text}>Name: {info?.name}</Text>
+            <Text style={styles.text}>Height: {info?.height}</Text>
+            <Text style={styles.text}>Weight: {info?.weight}</Text>
+            <Text style={styles.text}>Base Experience: {info?.base_experience}</Text>
             </View>
             <TouchableOpacity onPress={handleClick}>
                 <Text style={styles.link}>Back to Home</Text>
